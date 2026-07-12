@@ -1,0 +1,18 @@
+'use client'
+import {useEffect,useState} from 'react'
+import {useRouter} from 'next/navigation'
+import {supabase} from '../../../lib/supabaseClient'
+import {SEMANAS} from '../../../lib/exercicios'
+import NavBar from '../NavBar'
+export default function ExerciciosPage(){
+ const router=useRouter(),[loading,setLoading]=useState(true),[expired,setExpired]=useState(false),[profile,setProfile]=useState(null),[openWeek,setOpenWeek]=useState(1),[done,setDone]=useState([])
+ useEffect(()=>{setDone(JSON.parse(localStorage.getItem('leve_exercicios')||'[]'));(async()=>{const{data:s}=await supabase.auth.getSession();if(!s.session){router.replace('/login');return}const{data:p}=await supabase.from('profiles').select('*').eq('id',s.session.user.id).single();if(p&&!p.onboarding_completo){router.replace('/app/perfil');return}setProfile(p);setExpired(p?.subscription_status==='trial'&&new Date(p.trial_ends_at)<new Date());setLoading(false)})()},[router])
+ function toggle(day){const n=done.includes(day)?done.filter(x=>x!==day):[...done,day];setDone(n);localStorage.setItem('leve_exercicios',JSON.stringify(n))}
+ if(loading)return <div className="loading">Preparando seu plano...</div>
+ if(expired)return <div className="container"><div className="card" style={{textAlign:'center',marginTop:60}}><h1>Continue se movimentando</h1><p className="muted">Seu periodo de teste terminou.</p><a className="btn" href="https://pay.kiwify.com.br/SEU-LINK-DE-ASSINATURA">Conhecer planos</a></div><NavBar/></div>
+ const avisos=[];if(profile?.hipertenso)avisos.push('Aumente a intensidade aos poucos e converse com seu medico antes de atividades mais intensas.');if(profile?.diabetico)avisos.push('Monitore sua glicemia antes e depois do exercicio.')
+ return <div className="container"><section className="card exercise-hero"><span className="pill">PLANO DE 21 DIAS</span><h1 style={{margin:'10px 0 4px'}}>Movimento que acolhe</h1><p style={{margin:0}}>Evolua no seu ritmo, um dia de cada vez.</p></section>
+ {avisos.map(a=><div className="card" key={a}><span className="pill pill-warn">Cuidado personalizado</span><p style={{fontSize:13,marginBottom:0}}>{a}</p></div>)}
+ <div className="card-title"><div><span className="eyebrow">Sua jornada</span><h2 style={{margin:'5px 0 0'}}>{done.length} de 21 dias</h2></div><span className="pill">{Math.round(done.length/21*100)}%</span></div><div className="progress-track" style={{marginBottom:20}}><div className="progress-fill" style={{width:`${done.length/21*100}%`}}/></div>
+ {SEMANAS.map(s=>{const sd=s.dias.filter(d=>done.includes(d.dia)).length;return <section className="card" key={s.numero}><div className="week-head" onClick={()=>setOpenWeek(openWeek===s.numero?null:s.numero)}><div><span className="pill">SEMANA {s.numero}</span><h3 style={{margin:'8px 0 3px'}}>{s.titulo}</h3><small className="muted">{sd}/7 concluidos</small></div><b>{openWeek===s.numero?'−':'+'}</b></div>{openWeek===s.numero&&<div style={{marginTop:15}}>{s.dias.map(d=><div className={`day-row ${done.includes(d.dia)?'completed':''}`} key={d.dia}><div className="day-badge">{done.includes(d.dia)?'✓':d.dia}</div><div className="day-content"><p><strong>{d.atividade}</strong></p><p className="muted" style={{fontSize:12}}>{d.duracao} · {d.tipo==='externo'?'Ao ar livre':'Em casa'}</p><p style={{fontSize:12}}>{d.dica}</p></div><button className="status-btn" onClick={()=>toggle(d.dia)}>{done.includes(d.dia)?'Concluido':'Concluir'}</button></div>)}</div>}</section>})}<p className="muted" style={{fontSize:11,textAlign:'center'}}>Consulte um profissional de saude antes de iniciar ou intensificar atividades fisicas.</p><NavBar/></div>
+}
