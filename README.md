@@ -72,3 +72,19 @@ supabase/migrations/202607130001_pwa_preferences.sql
 Ela registra no perfil a apresentação do tutorial, a instalação detectada e o estado da permissão. A tabela `push_subscriptions` recebe a data da última validação da assinatura.
 
 Para testar o iPhone no navegador e em modo instalado, use Safari e “Adicionar à Tela de Início”. Para testar Android, use Chrome em HTTPS; o evento de instalação só aparece quando os critérios nativos do navegador forem atendidos. Permissão de push e instalação não funcionam integralmente em HTTP fora de `localhost`.
+
+### Três Momentos LEVE diários
+
+Execute `supabase/migrations/202607130002_daily_moments.sql` depois das migrations anteriores e publique novamente `process-notifications`. O cron existente de um minuto cria, sem duplicar, manhã, tarde e noite para usuários com permissão concedida e assinatura validada.
+
+Para antecipar testes, configure temporariamente o secret `ENABLE_NOTIFICATION_TEST_MODE=true` e invoque a função com o mesmo `CRON_SECRET` do cron:
+
+```json
+{
+  "testNow": "2026-07-13T08:00:00-03:00",
+  "testPeriod": "morning",
+  "testUserId": "UUID_DO_USUARIO"
+}
+```
+
+Use horários locais dentro das janelas: `08:00` para manhã, `13:30` para tarde e `20:30` para noite. Use sempre a data corrente em São Paulo. Desative o secret de teste ao terminar.
