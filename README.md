@@ -60,3 +60,15 @@ where user_id = 'UUID_DO_USUARIO' and notification_id = 'welcome-01';
 ```
 
 Em seguida, invoque `process-notifications` com `Authorization: Bearer CRON_SECRET`.
+
+### Instalação PWA e Momentos LEVE
+
+Execute também, na sequência, a migration:
+
+```text
+supabase/migrations/202607130001_pwa_preferences.sql
+```
+
+Ela registra no perfil a apresentação do tutorial, a instalação detectada e o estado da permissão. A tabela `push_subscriptions` recebe a data da última validação da assinatura.
+
+Para testar o iPhone no navegador e em modo instalado, use Safari e “Adicionar à Tela de Início”. Para testar Android, use Chrome em HTTPS; o evento de instalação só aparece quando os critérios nativos do navegador forem atendidos. Permissão de push e instalação não funcionam integralmente em HTTP fora de `localhost`.
