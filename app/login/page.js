@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabaseClient'
+import { consumeDestination } from '../../lib/authRedirect'
 
 function traduzErro(msg){
   if(!msg) return 'Algo deu errado. Tente novamente.'
@@ -28,7 +29,7 @@ export default function LoginPage(){
         const { data, error } = await supabase.auth.signUp({ email, password })
         if(error) throw error
         if(data.session){
-          router.replace('/app')
+          router.replace(consumeDestination('/app'))
         } else {
           setInfo('Cadastro feito! Verifique seu e-mail para confirmar a conta e depois faca login.')
           setMode('signin')
@@ -36,7 +37,7 @@ export default function LoginPage(){
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password })
         if(error) throw error
-        router.replace('/app')
+        router.replace(consumeDestination('/app'))
       }
     } catch(err){
       setError(traduzErro(err.message))

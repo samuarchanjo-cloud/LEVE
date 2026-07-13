@@ -1,5 +1,6 @@
 import './globals.css'
 import SwRegister from './sw-register'
+import NotificationTracker from './notification-tracker'
 
 export const metadata = {
   title: 'Metodo LEVE',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR">
       <body>
         {children}
+        <NotificationTracker />
         <SwRegister />
       </body>
     </html>

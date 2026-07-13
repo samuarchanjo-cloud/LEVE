@@ -42,3 +42,21 @@ Projeto Supabase: `leve`. Tabelas principais: `profiles` (perfil do usuário,
 inclui dados de saúde e meta de peso), `diario_entries` (checklist diário) e
 `push_subscriptions` (notificações push). Alterações de schema são feitas via
 migrations no Supabase, não neste repositório.
+
+## Onboarding e notificações
+
+1. Execute `supabase/migrations/202607120001_onboarding_notifications.sql` no SQL Editor.
+2. Publique a função: `supabase functions deploy process-notifications --no-verify-jwt`.
+3. Configure os secrets: `CRON_SECRET`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` e `VAPID_SUBJECT`.
+   `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` são fornecidos automaticamente à Edge Function.
+4. Habilite `pg_cron` e `pg_net` e adapte o comando comentado ao final da migration com o project ref e o mesmo `CRON_SECRET`.
+
+Para testar sem esperar dez minutos, altere apenas o job do usuário de teste:
+
+```sql
+update notification_history
+set scheduled_at = now(), error_code = null
+where user_id = 'UUID_DO_USUARIO' and notification_id = 'welcome-01';
+```
+
+Em seguida, invoque `process-notifications` com `Authorization: Bearer CRON_SECRET`.

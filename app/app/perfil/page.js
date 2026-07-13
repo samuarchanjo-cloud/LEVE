@@ -47,7 +47,8 @@ export default function PerfilPage(){
     }).eq('id', userId)
     setSaving(false)
     if(updError){ setError('Nao foi possivel salvar. Tente novamente.'); return }
-    router.replace('/app')
+    await supabase.rpc('schedule_welcome_notification')
+    router.replace('/app/onboarding')
   }
 
   if(loading) return <div className="container" style={{textAlign:'center', paddingTop:120}}>Carregando...</div>
