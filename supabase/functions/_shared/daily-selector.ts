@@ -1,12 +1,12 @@
 import {dailyMessages,fallbackMessages,type NotificationMessage,type Period,type MessageCondition} from './messages.ts'
 import {stableHash} from './daily-schedule.mjs'
+import type {DailyState} from './daily-state.ts'
 
-export type DailyState={water:boolean;food:boolean;movement:boolean;journal:boolean;habitsCompleted:number;streak:number;recipeId:string}
 export type RecentDelivery={message_id?:string|null;category:string}
 const priorities:Record<Period,string[]>={
  morning:['motivation','hydration-pending','self-esteem','movement-pending'],
  afternoon:['food-pending','food-completed','hydration-pending','hydration-maintenance','reflection','movement-pending','movement-completed','recipe'],
- night:['journal-pending','sleep','reflection','self-esteem','celebration','streak'],
+ evening:['journal-pending','sleep','reflection','self-esteem','celebration','streak'],
 }
 
 function conditionMatches(condition:MessageCondition,state:DailyState){

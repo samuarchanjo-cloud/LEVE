@@ -1,4 +1,4 @@
-export type Period='morning'|'afternoon'|'night'
+export type Period='morning'|'afternoon'|'evening'
 export type DailyCategory='motivation'|'hydration-pending'|'hydration-maintenance'|'food-pending'|'food-completed'|'movement-pending'|'movement-completed'|'journal-pending'|'sleep'|'self-esteem'|'reflection'|'celebration'|'recipe'|'streak'
 export type MessageCondition='water-pending'|'water-started'|'food-pending'|'food-completed'|'movement-pending'|'movement-completed'|'journal-pending'|'journal-completed'|'streak'
 export type NotificationMessage={id:string;period?:Period;category:string;title:string;body:string;targetUrl:string;conditions?:MessageCondition[]}
@@ -61,26 +61,26 @@ export const dailyMessages:NotificationMessage[]=[
  m('afternoon-recipe-02','afternoon','recipe','🍳 Uma refeição leve pode ser prática e saborosa.','/app/receitas/{recipeId}'),
  m('afternoon-recipe-03','afternoon','recipe','🌿 Nutrir-se também pode ser prazeroso.','/app/receitas/{recipeId}'),
 
- m('night-journal-01','night','journal-pending','📝 Como foi seu dia? Reserve algumas palavras para você.','/app/diario?focus=reflection',['journal-pending']),
- m('night-journal-02','night','journal-pending','🌿 Antes de dormir, reconheça algo bom que aconteceu hoje.','/app/diario?focus=reflection',['journal-pending']),
- m('night-journal-03','night','journal-pending','📝 Seu Diário LEVE está esperando por algumas linhas.','/app/diario?focus=reflection',['journal-pending']),
- m('night-journal-04','night','journal-pending','🌙 Registrar seu dia também é uma forma de desacelerar.','/app/diario?focus=reflection',['journal-pending']),
- m('night-sleep-01','night','sleep','🌙 Seu corpo também evolui quando descansa.','/app/diario?focus=sleep'),
- m('night-sleep-02','night','sleep','😴 Desacelere aos poucos. O dia já pode terminar.','/app/diario?focus=sleep'),
- m('night-sleep-03','night','sleep','🌿 Dormir bem também faz parte da sua jornada.','/app/diario?focus=sleep'),
- m('night-sleep-04','night','sleep','💚 Descansar não é perder tempo. É cuidar do próximo dia.','/app/diario?focus=sleep'),
- m('night-selfesteem-01','night','self-esteem','❤️ Seja gentil consigo antes de encerrar o dia.','/app/diario?focus=self-esteem'),
- m('night-selfesteem-02','night','self-esteem','💚 Você merece o mesmo carinho que oferece aos outros.','/app/diario?focus=self-esteem'),
- m('night-selfesteem-03','night','self-esteem','🌿 Seu valor não depende de um dia perfeito.','/app/diario?focus=self-esteem'),
- m('night-reflection-01','night','reflection','🌿 O que deixou seu dia um pouco mais leve?','/app/diario?focus=reflection'),
- m('night-reflection-02','night','reflection','💭 Qual pequena escolha de hoje fez bem para você?','/app/diario?focus=reflection'),
- m('night-reflection-03','night','reflection','🌙 Você não precisa avaliar o dia apenas pelo que faltou.','/app/diario?focus=reflection'),
- m('night-celebration-01','night','celebration','🎉 Você cuidou de si hoje. Isso merece ser reconhecido.','/app/progresso'),
- m('night-celebration-02','night','celebration','🌱 Mais um dia construindo hábitos no seu ritmo.','/app/progresso'),
- m('night-celebration-03','night','celebration','💚 Cada pequena ação de hoje fez parte da sua jornada.','/app/progresso'),
- m('night-celebration-04','night','celebration','✨ Seu esforço de hoje também conta.','/app/progresso'),
- m('night-streak-01','night','streak','🔥 Você está há {streak} dias cuidando de você.','/app/progresso',['streak']),
- m('night-streak-02','night','streak','🌱 Sua constância chegou a {streak} dias.','/app/progresso',['streak']),
+ m('evening-journal-01','evening','journal-pending','📝 Como foi seu dia? Reserve algumas palavras para você.','/app/diario?focus=reflection',['journal-pending']),
+ m('evening-journal-02','evening','journal-pending','🌿 Antes de dormir, reconheça algo bom que aconteceu hoje.','/app/diario?focus=reflection',['journal-pending']),
+ m('evening-journal-03','evening','journal-pending','📝 Seu Diário LEVE está esperando por algumas linhas.','/app/diario?focus=reflection',['journal-pending']),
+ m('evening-journal-04','evening','journal-pending','🌙 Registrar seu dia também é uma forma de desacelerar.','/app/diario?focus=reflection',['journal-pending']),
+ m('evening-sleep-01','evening','sleep','🌙 Seu corpo também evolui quando descansa.','/app/diario?focus=sleep'),
+ m('evening-sleep-02','evening','sleep','😴 Desacelere aos poucos. O dia já pode terminar.','/app/diario?focus=sleep'),
+ m('evening-sleep-03','evening','sleep','🌿 Dormir bem também faz parte da sua jornada.','/app/diario?focus=sleep'),
+ m('evening-sleep-04','evening','sleep','💚 Descansar não é perder tempo. É cuidar do próximo dia.','/app/diario?focus=sleep'),
+ m('evening-selfesteem-01','evening','self-esteem','❤️ Seja gentil consigo antes de encerrar o dia.','/app/diario?focus=self-esteem'),
+ m('evening-selfesteem-02','evening','self-esteem','💚 Você merece o mesmo carinho que oferece aos outros.','/app/diario?focus=self-esteem'),
+ m('evening-selfesteem-03','evening','self-esteem','🌿 Seu valor não depende de um dia perfeito.','/app/diario?focus=self-esteem'),
+ m('evening-reflection-01','evening','reflection','🌿 O que deixou seu dia um pouco mais leve?','/app/diario?focus=reflection'),
+ m('evening-reflection-02','evening','reflection','💭 Qual pequena escolha de hoje fez bem para você?','/app/diario?focus=reflection'),
+ m('evening-reflection-03','evening','reflection','🌙 Você não precisa avaliar o dia apenas pelo que faltou.','/app/diario?focus=reflection'),
+ m('evening-celebration-01','evening','celebration','🎉 Você cuidou de si hoje. Isso merece ser reconhecido.','/app/progresso'),
+ m('evening-celebration-02','evening','celebration','🌱 Mais um dia construindo hábitos no seu ritmo.','/app/progresso'),
+ m('evening-celebration-03','evening','celebration','💚 Cada pequena ação de hoje fez parte da sua jornada.','/app/progresso'),
+ m('evening-celebration-04','evening','celebration','✨ Seu esforço de hoje também conta.','/app/progresso'),
+ m('evening-streak-01','evening','streak','🔥 Você está há {streak} dias cuidando de você.','/app/progresso',['streak']),
+ m('evening-streak-02','evening','streak','🌱 Sua constância chegou a {streak} dias.','/app/progresso',['streak']),
 ]
 
 export const fallbackMessages:NotificationMessage[]=[
@@ -88,8 +88,8 @@ export const fallbackMessages:NotificationMessage[]=[
  m('fallback-morning-02','morning','motivation','💚 Hoje também pode ter um passo leve.'),
  m('fallback-afternoon-01','afternoon','reflection','🌱 Seu próximo cuidado não precisa ser grande.'),
  m('fallback-afternoon-02','afternoon','reflection','✨ Pequenas escolhas continuam contando.'),
- m('fallback-night-01','night','reflection','🌿 Vá no seu ritmo. Viva LEVE.'),
- m('fallback-night-02','night','self-esteem','💛 Você merece presença, não pressão.'),
+ m('fallback-evening-01','evening','reflection','🌿 Vá no seu ritmo. Viva LEVE.'),
+ m('fallback-evening-02','evening','self-esteem','💛 Você merece presença, não pressão.'),
 ]
 
 export const messages=[welcomeMessage,...legacyMessages,...dailyMessages,...fallbackMessages]

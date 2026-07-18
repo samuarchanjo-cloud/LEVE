@@ -1,7 +1,7 @@
 export const MOMENT_WINDOWS={
   morning:{start:7*60+30,end:9*60},
   afternoon:{start:12*60+30,end:15*60},
-  night:{start:19*60+45,end:21*60+30},
+  evening:{start:19*60+45,end:21*60+30},
 }
 
 export function stableHash(value){

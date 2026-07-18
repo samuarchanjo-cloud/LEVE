@@ -1,4 +1,4 @@
--- Preferências do fluxo de instalação e permissão. Execute após 202607120001.
+-- Preferências do fluxo de instalação e permissão. Execute após 20260713030907.
 alter table public.profiles
   add column if not exists install_tutorial_dismissed_at timestamptz,
   add column if not exists pwa_installed_at timestamptz,
